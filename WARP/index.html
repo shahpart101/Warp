@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Warp Headcount Scenario Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Warp Headcount Scenario Planner</h1>
+
+    <input type="file" id="resumeUpload" />
+
+    <div id="parsedSummary" class="hidden">
+      <h2>Parsed Resume Summary</h2>
+      <p id="summaryText"></p>
+    </div>
+
+    <div id="chartContainer" class="hidden">
+      <canvas id="radarChart"></canvas>
+    </div>
+
+    <div id="scoreContainer" class="hidden">
+      <h2>Worth-It Score: <span id="scoreValue"></span></h2>
+      <p id="recommendation"></p>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
