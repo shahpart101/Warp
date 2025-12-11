@@ -1,33 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Warp Headcount Scenario Planner</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Warp Headcount & Compensation Planner</title>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+  </script>
 </head>
 
 <body>
-  <div class="container">
-    <h1>Warp Headcount Scenario Planner</h1>
 
-    <input type="file" id="resumeUpload" />
+  <!-- TOP HEADER (only one now) -->
+  <header class="warp-header">
+    <img src="warp.png" class="warp-logo" alt="Warp Logo" />
+    <h1>Headcount & Compensation Planner</h1>
+  </header>
 
-    <div id="parsedSummary" class="hidden">
-      <h2>Parsed Resume Summary</h2>
-      <p id="summaryText"></p>
-    </div>
+  <!-- VIRAL SHAREABILITY SIGNAL -->
+  <section class="viral-signal">
+    <h3>Shareability Signal</h3>
+    <p id="viralInsight"></p>
+  </section>
 
-    <div id="chartContainer" class="hidden">
-      <canvas id="radarChart"></canvas>
-    </div>
+  <!-- Tier label (dynamic) -->
+  <div id="tierLabel" class="tier-label"></div>
 
-    <div id="scoreContainer" class="hidden">
-      <h2>Worth-It Score: <span id="scoreValue"></span></h2>
-      <p id="recommendation"></p>
-    </div>
-  </div>
+  <main class="container">
 
-  <script src="app.js" defer></script>
+    <!-- Upload Resume -->
+    <section class="upload-card">
+      <input type="file" id="resumeUpload" />
+    </section>
+
+    <!-- TIMELINE GRID -->
+    <div id="timeline" class="timeline-grid"></div>
+
+    <!-- INSIGHT SECTION -->
+    <section id="insightSection" class="insight hidden">
+
+      <h2 class="section-title">Candidate Snapshot</h2>
+      <p id="summaryText" class="summary"></p>
+
+      <!-- ADD ROLE SECTION -->
+      <div class="role-section">
+        <h2>Add Role to Timeline</h2>
+
+        <div class="impact-inputs">
+
+          <label>Role</label>
+          <select id="impactRolePicker">
+            <option>Software Engineer</option>
+            <option>Designer</option>
+            <option>Product Manager</option>
+            <option>Salesperson</option>
+          </select>
+
+          <label>Ramp Time</label>
+          <select id="rampPicker">
+            <option value="1">1 Month</option>
+            <option value="2">2 Months</option>
+            <option value="3">3 Months</option>
+            <option value="4">4 Months</option>
+          </select>
+
+          <label>Founder Attention</label>
+          <select id="attentionPicker">
+            <option value="low">Low (1–2 hrs/wk)</option>
+            <option value="medium">Medium (3–5 hrs/wk)</option>
+            <option value="high">High (6–10 hrs/wk)</option>
+          </select>
+
+          <label>Capability Added</label>
+          <select id="capabilityPicker">
+            <option>Backend</option>
+            <option>Frontend</option>
+            <option>ML/AI</option>
+            <option>Product</option>
+            <option>Design</option>
+            <option>Sales</option>
+          </select>
+
+          <button id="addImpactRoleBtn">Add Hire</button>
+        </div>
+
+        <!-- ADD TO TIMELINE -->
+        <div class="timeline-add">
+          <select id="rolePicker">
+            <option>Software Engineer</option>
+            <option>Designer</option>
+            <option>Product Manager</option>
+            <option>Salesperson</option>
+          </select>
+
+          <select id="monthPicker">
+            <option value="0">Month 1</option>
+            <option value="1">Month 2</option>
+            <option value="2">Month 3</option>
+            <option value="3">Month 4</option>
+            <option value="4">Month 5</option>
+            <option value="5">Month 6</option>
+          </select>
+
+          <button id="addRoleBtn">Add Role</button>
+        </div>
+      </div>
+
+      <!-- RADAR + SCORE -->
+      <div class="visuals">
+        <div class="chart-wrapper">
+          <canvas id="radarChart"></canvas>
+          <div id="scoreBadge" class="score-badge"></div>
+        </div>
+      </div>
+
+      <!-- BURN + RUNWAY -->
+      <div id="burnRate" class="burn"></div>
+      <div id="runway" class="runway"></div>
+
+      <!-- IMPACT TABLE -->
+      <div id="impactTable" class="impact-table"></div>
+
+      <!-- HIRE RECOMMENDATION -->
+      <div id="recommendation" class="recommendation"></div>
+
+    </section>
+  </main>
+
+  <!-- APP JS -->
+  <script src="app.js"></script>
+
 </body>
 </html>
